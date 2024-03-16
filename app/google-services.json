@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "487862346545",
+    "firebase_url": "https://mgcomartial-default-rtdb.firebaseio.com",
+    "project_id": "mgcomartial",
+    "storage_bucket": "mgcomartial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487862346545:android:12f47ef1a67b13b9798610",
+        "android_client_info": {
+          "package_name": "com.mg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBetiv0fexfLPrsf521HVNLfEqvQcup4Oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
