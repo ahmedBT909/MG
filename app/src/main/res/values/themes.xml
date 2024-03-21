@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.MG" parent="Base.Theme.MG" />
+
+    <style name="Theme.MG.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MG.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MG.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
