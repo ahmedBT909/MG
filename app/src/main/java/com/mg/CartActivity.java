@@ -1,19 +1,25 @@
 package com.mg;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mg.Model.cart;
@@ -25,6 +31,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     Button NextProccess;
     TextView txtTotalAmount;
+    private  int total_price =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +44,16 @@ public class CartActivity extends AppCompatActivity {
         NextProccess = (Button) findViewById(R.id.next_proccess_btn);
         txtTotalAmount = (TextView)findViewById(R.id.totalPrice);
 
+    NextProccess.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            txtTotalAmount.setText("Tatal Price EG"+String.valueOf(total_price));
+            Intent intent = new Intent(CartActivity.this,ConfirmFinalOrder.class);
+            intent.putExtra("Total price",String.valueOf(total_price));
+            startActivity(intent);
+        finish();
+        }
+    });
     }
 
     @Override
@@ -56,6 +73,44 @@ public class CartActivity extends AppCompatActivity {
                 holder.txtProductQuantity.setText("Quantity = "+model.getQuantity());
                 holder.txtProductprice.setText("Price = " + model.getPrice());
                 holder.txtProductName.setText(model.getPname());
+                int oneTyperProductprice= ((Integer.valueOf(model.getPrice()))* Integer.valueOf(model.getQuantity())) ;
+                total_price = total_price+ oneTyperProductprice;
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CharSequence options[]  = new CharSequence[]{"Edit" ,"Remove"
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+                        builder.setTitle("Cart options:");
+                        builder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(which == 0 ){
+                                    Intent intent = new Intent(CartActivity.this,ProductDetailaActivity.class);
+                                    intent.putExtra("pid",model.getPid());
+                                    startActivity(intent);
+                                }if(which == 1 ){
+                                    cartListRef.child("User View").
+                                            child(Prevalent.currentOnlineUser.getPhone())
+                                            .child("Products")
+                                            .child(model.getPid())
+                                            .removeValue()
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        Toast.makeText(CartActivity.this, "Item Removed Successful", Toast.LENGTH_SHORT).show();
+
+
+                                                    }
+                                                }
+                                            });
+                                }
+                            }
+                        });
+                        builder.show();
+                    }
+                });
             }
 
             @NonNull
