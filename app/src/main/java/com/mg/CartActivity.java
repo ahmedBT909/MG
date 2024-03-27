@@ -20,8 +20,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mg.Model.cart;
 import com.mg.Pravalent.Prevalent;
 import com.mg.ViewHolder.CartViewHolder;
@@ -30,8 +33,10 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button NextProccess;
-    TextView txtTotalAmount;
+    TextView txtTotalAmount,txtMsg1;
+
     private  int total_price =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,7 @@ public class CartActivity extends AppCompatActivity {
 
         NextProccess = (Button) findViewById(R.id.next_proccess_btn);
         txtTotalAmount = (TextView)findViewById(R.id.totalPrice);
+        txtMsg1 = (TextView)findViewById(R.id.msg1);
 
     NextProccess.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -59,6 +65,7 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        checkOrderState();
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         FirebaseRecyclerOptions<cart> options =
                 new FirebaseRecyclerOptions.Builder<cart>()
@@ -123,5 +130,44 @@ public class CartActivity extends AppCompatActivity {
         };
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+    }
+    private  void  checkOrderState(){
+        DatabaseReference orderRf;
+        orderRf = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+        orderRf.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String shiipingState = snapshot.child("state").getValue().toString();
+                    String username = snapshot.child("name").getValue().toString();
+                    if(shiipingState.equals("shipped")){
+                        txtTotalAmount.setText("Dear" + username + "\n order is shipped Successfully");
+                        recyclerView.setVisibility(View.GONE);
+                        txtMsg1.setVisibility(View.VISIBLE);
+                        txtMsg1.setText("Congratulations. you final order has been Shipped\n" +
+                                "successfully. soon you will receive your order at\n" +
+                                "door step");
+                        NextProccess.setVisibility(View.GONE);
+                        Toast.makeText(CartActivity.this, "you can pruchase , once your final  first order", Toast.LENGTH_SHORT).show();
+                    }else if(shiipingState.equals("not shipped")){
+                        txtTotalAmount.setText("Shipped state = Not shipped");
+                        recyclerView.setVisibility(View.GONE);
+                        txtMsg1.setVisibility(View.VISIBLE);
+                        NextProccess.setVisibility(View.GONE);
+                        Toast.makeText(CartActivity.this, "you can pruchase , once your final  first order", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

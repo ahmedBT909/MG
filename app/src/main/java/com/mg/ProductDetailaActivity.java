@@ -34,7 +34,7 @@ Button addToCartButton;
 ImageView productImage;
 ElegantNumberButton numberButton;
 TextView productName , productPrice, productDescripotin;
-String productID="";
+String productID="" , state = "Normal";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +51,21 @@ String productID="";
     addToCartButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            addingToCart();
+
+            if(state.equals("Order Placed")|| state.equals("Order Shipped")){
+                Toast.makeText(ProductDetailaActivity.this, "you can  add purchase more products, once your order is shipped", Toast.LENGTH_LONG).show();
+            }else {
+                addingToCart();
+            }
         }
     });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkOrderState();
     }
 
     private void addingToCart() {
@@ -115,6 +126,35 @@ String productID="";
 
 
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+    private  void  checkOrderState(){
+        DatabaseReference orderRf;
+        orderRf = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
+        orderRf.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String shiipingState = snapshot.child("state").getValue().toString();
+
+                    if(shiipingState.equals("shipped")){
+                        state = "Order Shipped";
+
+                        }else if(shiipingState.equals("not shipped")){
+                        state = "Order Placed";
+
+                    }
+
+
+                }
+
             }
 
             @Override
