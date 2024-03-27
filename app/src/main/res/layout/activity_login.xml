@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
+    android:background="@drawable/bkg"
     tools:context=".LoginActivity">
     <ImageView
         android:id="@+id/login_applogo"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:src="@drawable/applogo"
+        android:layout_width="500dp"
+        android:layout_height="250dp"
+        android:src="@drawable/logologin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"/>
-    
+        android:layout_marginTop="50dp"/>
+
     <EditText
         android:id="@+id/login_phone_number_input"
         android:layout_width="match_parent"
@@ -22,12 +22,15 @@
         android:padding="20dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-        android:hint="phone number"
+        android:hint="  phone number"
         android:inputType="number"
         android:textColor="@color/Beige"
         android:textColorHint="@color/Beige"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:drawableLeft="@drawable/phone"
+        android:background="@drawable/custom_text"
+
         />
     <EditText
         android:id="@+id/login_phone_password_input"
@@ -38,11 +41,13 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="6dp"
-        android:hint="password"
+        android:hint="  password"
         android:textColor="@color/Beige"
         android:textColorHint="@color/Beige"
-        android:textSize="17sp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:drawableLeft="@drawable/password"
+        android:background="@drawable/custom_text"
         />
     <LinearLayout
         android:id="@+id/linear_layout_1"
@@ -61,7 +66,7 @@
             android:textColor="@color/Beige"
             app:cbd_strokeColor="@color/Beige"
             android:gravity="center_vertical"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:layout_marginLeft="17dp"
             />
         <TextView
@@ -72,33 +77,35 @@
             android:textColor="@color/Beige"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="100dp"
             />
 
 
     </LinearLayout>
+
     <Button
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_layout_1"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
+        android:backgroundTint="#9401080E"
         android:padding="17dp"
-        android:textAllCaps="false"
-        android:textSize="18sp"
         android:text="Login"
-        android:textColor="@color/white"/>
+        android:textAllCaps="false"
+        android:textColor="@color/Beige"
+        android:textSize="18sp" />
     <TextView
         android:id="@+id/admin_panel_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iam Admin"
+        android:text="I am Admin"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/login_btn"
         android:textColor="@color/Beige"
-        android:textSize="20sp"
+        android:textSize="17dp"
         android:textStyle="bold"
         android:layout_marginLeft="80dp"
         android:layout_marginEnd="23dp"

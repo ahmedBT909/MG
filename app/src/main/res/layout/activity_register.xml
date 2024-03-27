@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/register"
+    android:background="@drawable/bkg"
     tools:context=".RegisterActivity">
 
     <ImageView
         android:id="@+id/register_applogo"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:src="@drawable/applogo"
+        android:layout_width="500dp"
+        android:layout_height="250dp"
+        android:src="@drawable/logologin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="50dp"
         />
 
     <EditText
@@ -24,11 +24,14 @@
         android:padding="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:hint="Name"
+        android:hint="  Name"
         android:inputType="text"
         android:textColor="@color/Beige"
         android:textColorHint="@color/Beige"
-        android:textSize="19sp"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/person"
+        android:background="@drawable/custom_text"
         />
 
     <EditText
@@ -39,12 +42,15 @@
         android:padding="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:hint="Phone Number"
+        android:hint="  Phone Number"
         android:inputType="number"
         android:textColor="@color/Beige"
         android:textColorHint="@color/Beige"
-        android:textSize="19sp"
+        android:textSize="17sp"
         android:layout_marginTop="6dp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/phone"
+        android:background="@drawable/custom_text"
         />
 
 
@@ -57,11 +63,14 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="6dp"
-        android:hint="Password"
+        android:hint="  Password"
         android:inputType="textPassword"
         android:textColor="@color/Beige"
         android:textColorHint="@color/Beige"
-        android:textSize="19sp"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/password"
+        android:background="@drawable/custom_text"
         />
 
 
@@ -78,6 +87,7 @@
         android:textSize="18sp"
         android:text="Create Account"
         android:textColor="@android:color/white"
+        android:backgroundTint="#9401080E"
         />
 
 </RelativeLayout>
