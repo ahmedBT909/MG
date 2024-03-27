@@ -4,22 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bkg"
+    android:background="@drawable/login_shop"
     tools:context=".LoginActivity">
-    <ImageView
-        android:id="@+id/login_applogo"
-        android:layout_width="500dp"
-        android:layout_height="250dp"
-        android:src="@drawable/logologin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
+
 
     <EditText
         android:id="@+id/login_phone_number_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/login_applogo"
         android:padding="20dp"
+        android:layout_marginTop="270dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:hint="  phone number"
@@ -67,6 +61,7 @@
             app:cbd_strokeColor="@color/Beige"
             android:gravity="center_vertical"
             android:textSize="17sp"
+            android:textStyle="bold"
             android:layout_marginLeft="17dp"
             />
         <TextView
@@ -96,7 +91,8 @@
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="@color/Beige"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/admin_panel_link"
         android:layout_width="wrap_content"
