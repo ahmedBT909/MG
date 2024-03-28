@@ -17,7 +17,7 @@
         android:layout_marginEnd="80dp"
         android:text="WELCOME"
         android:textAlignment="center"
-        android:textColor="#E0E0E8"
+        android:textColor="@color/sea"
         android:textSize="60dp"
         android:textStyle="bold|italic" />
 
