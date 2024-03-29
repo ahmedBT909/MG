@@ -73,9 +73,9 @@ String totalAmount = "";
                 .child("Orders")
                 .child(Prevalent.currentOnlineUser.getPhone());
         HashMap<String , Object> orderMap =new HashMap<>();
-        orderMap.put("total Amount",totalAmount);
+        orderMap.put("totalAmount",totalAmount);
         orderMap.put("name",namdeEdit.getText().toString());
-        orderMap.put("phone ",phoneEdit.getText().toString());
+        orderMap.put("phone",phoneEdit.getText().toString());
         orderMap.put("address",addressEdit.getText().toString());
         orderMap.put("city",cityEdit.getText().toString());
         orderMap.put("Date",saveCurrentData);

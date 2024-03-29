@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="10dp"
         android:text="Add New Product"
         android:textAlignment="center"
         android:textSize="26sp"
@@ -29,7 +29,7 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
@@ -73,7 +73,7 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/glasses"
@@ -116,7 +116,7 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/headphones_handfree"
@@ -148,6 +148,33 @@
             />
 
     </LinearLayout>
+    <Button
+        android:id="@+id/checkOrder_BTn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#9401080E"
+        android:layout_above="@id/admin_logoutBTN"
+        android:text="Check New Orders"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textAllCaps="false"/>
+    <Button
+        android:id="@+id/admin_logoutBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#9401080E"
+        android:text="Logout"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textAllCaps="false"/>
+
 
 
 
