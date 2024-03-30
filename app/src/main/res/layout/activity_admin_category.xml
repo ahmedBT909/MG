@@ -149,6 +149,19 @@
 
     </LinearLayout>
     <Button
+        android:id="@+id/maintain_BTn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#9401080E"
+        android:layout_above="@id/checkOrder_BTn"
+        android:text="Maintain products"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textAllCaps="false"/>
+    <Button
         android:id="@+id/checkOrder_BTn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
