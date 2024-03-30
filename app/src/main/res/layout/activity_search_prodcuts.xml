@@ -9,41 +9,45 @@
         android:id="@+id/r5"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/Teal"
+        android:background="#232529"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
+
         <EditText
             android:id="@+id/search_product"
-            android:layout_width="280dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="111dp"
             android:hint="Product Name"
+            android:padding="15dp"
+            android:textColorHint="@color/sea"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:background="@color/white"
-            android:padding="9dp"
-            android:textColorHint="@color/black"
-            android:layout_marginStart="5dp"
-            android:layout_centerVertical="true"
+            android:background="@drawable/custom_text"
+
             />
 
         <Button
             android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_marginRight="-100dp"
             android:layout_toLeftOf="@+id/search_product"
-            android:backgroundTint="#9401080E"
-            android:padding="9dp"
+            android:backgroundTint="#0F1319"
+            android:padding="10dp"
             android:text="search"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            android:textColor="@color/sea"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-smallcaps"
+            />
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/r5">
+        android:layout_below="@+id/r5"
+        android:background="@drawable/bg">
 
     </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

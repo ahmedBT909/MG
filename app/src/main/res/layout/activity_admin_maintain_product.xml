@@ -12,7 +12,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#232529">
 
 
         <ImageView
@@ -27,24 +28,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_image_maintain"
-            android:hint="Product Name"
-            android:textAlignment="center"
-            android:textSize="18dp"
+            android:hint="  Product Name"
+            android:textSize="17dp"
+            android:drawableLeft="@drawable/product_name"
             android:padding="12dp"
             android:layout_margin="5dp"
-            android:textColor="@color/Teal"
+            android:textColorHint="@color/sea"
+            android:background="@drawable/custom_text"
             />
         <EditText
             android:id="@+id/product_price_maintain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_name_maintain"
-            android:hint="Product Price"
-            android:textAlignment="center"
-            android:textSize="18dp"
+            android:hint="  Product Price"
+            android:textSize="17dp"
+            android:drawableLeft="@drawable/price"
             android:padding="12dp"
             android:layout_margin="5dp"
-            android:textColor="@color/Teal"
+            android:textColorHint="@color/sea"
+            android:background="@drawable/custom_text"
             />
 
         <EditText
@@ -52,26 +55,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_price_maintain"
-            android:hint="Product Description"
+            android:hint="  Product Description"
             android:layout_marginTop="2dp"
-            android:textAlignment="center"
-            android:textSize="16dp"
+            android:textSize="17dp"
+            android:drawableLeft="@drawable/description"
             android:padding="12dp"
             android:layout_margin="5dp"
-            android:textColor="@color/Teal"
+            android:textColorHint="@color/sea"
+            android:background="@drawable/custom_text"
             />
         <Button
             android:id="@+id/aplly_chnges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_description_maintain"
-            android:hint="Aplly Changes"
+            android:hint="Apply Changes"
             android:layout_marginTop="2dp"
             android:textAlignment="center"
-            android:textSize="18dp"
-            android:padding="12dp"
+            android:textSize="20dp"
+            android:padding="10dp"
             android:layout_margin="5dp"
-            android:textColor="@color/Teal"
+            android:textColorHint="@color/sea"
+            android:backgroundTint="#9401080E"
+
             />
 
     </RelativeLayout>

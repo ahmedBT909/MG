@@ -4,68 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductDetailaActivity">
+    tools:context=".ProductDetailaActivity"
+    android:background="@drawable/bg"
+    >
     <ImageView
         android:id="@+id/product_image_details"
         android:layout_width="match_parent"
         android:layout_height="260dp"
         android:scaleType="centerCrop"/>
+
     <TextView
         android:id="@+id/product_name_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_image_details"
-        android:text="product name"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:text="product name"
+        android:textColor="@color/sea"
+        android:textSize="32dp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/product_des_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_name_details"
-        android:text="product Description"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:text="product Description"
+        android:textColor="@color/sea"
+        android:textSize="32dp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/product_price_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_des_details"
-        android:text="product price"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:text="product price"
+        android:textColor="@color/sea"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-smallcaps"
+        />
+
     <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-       android:id="@+id/number_btn"
+        android:id="@+id/number_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="6dp"
-        app:textSize="16dp"
-        app:initialNumber="1"
-        app:finalNumber="10"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/product_price_details"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="42dp"
+        android:elevation="6dp"
         android:gravity="center"
+        app:backGroundColor="@color/sea"
+        app:finalNumber="10"
+        app:initialNumber="1"
+        app:textColor="#01080E"
+        app:textSize="16dp"
+        android:layout_centerHorizontal="true"
+
         >
 
     </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
-<Button
-    android:id="@+id/pd_add_to_cart_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/sea"
-    android:layout_margin="15dp"
-    android:layout_alignParentBottom="true"
-    android:text="Add to cart"
-    android:textSize="18sp"
-    android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/pd_add_to_cart_button"
+        android:layout_width="382dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#9401080E"
+        android:text="Add to cart"
+        android:textColor="@color/sea"
+        android:textSize="24sp"
+        />
 </RelativeLayout>

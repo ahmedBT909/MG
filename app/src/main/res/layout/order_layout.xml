@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/Teal"
+        android:background="#232529"
         android:padding="10dp">
 
         <TextView
@@ -16,9 +16,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:text="User Name"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/sea" />
 
         <TextView
             android:id="@+id/order_phone_number"
@@ -29,9 +29,9 @@
             android:layout_marginRight="2dp"
             android:text="Phone Number"
             android:textAlignment="viewEnd"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/sea" />
 
         <TextView
             android:id="@+id/order_total_price"
@@ -41,9 +41,9 @@
             android:layout_marginTop="25dp"
             android:gravity="center"
             android:text="Total price"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="@color/sea" />
 
         <TextView
             android:id="@+id/order_Address_city"
@@ -53,9 +53,9 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Address , City"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="@color/sea" />
 
         <TextView
             android:id="@+id/order_date_time"
@@ -65,9 +65,9 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Date Time"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="@color/sea" />
 
         <Button
             android:id="@+id/show_all_Products"
@@ -77,10 +77,11 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#9401080E"
             android:text="Show This Order Products"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textColor="@color/sea"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
 </RelativeLayout>

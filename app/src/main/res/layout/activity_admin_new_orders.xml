@@ -10,21 +10,23 @@
         android:id="@+id/r2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/Teal"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="#191B1F">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Orders"
-            android:textColor="@color/white"
+            android:textColor="@color/sea"
             android:textSize="25dp"
             android:textAlignment="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            />
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@id/r2"
         android:id="@+id/order_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg">
     </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

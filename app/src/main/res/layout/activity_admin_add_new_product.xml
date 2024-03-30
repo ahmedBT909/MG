@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminAddNewProductActivity"
-    android:background="#1C2833"
+    android:background="@drawable/bg"
     >
 
 
@@ -92,8 +92,8 @@
         android:layout_marginRight="30dp"
         android:backgroundTint="#9401080E"
         android:textAllCaps="false"
-        android:textColor="@color/Beige"
-        android:textSize="18sp"
+        android:textColor="@color/sea"
+        android:textSize="24sp"
         android:textStyle="bold"
 
 
