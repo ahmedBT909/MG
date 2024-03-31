@@ -45,7 +45,7 @@ successfully. soon it will be verified."
         android:layout_height="match_parent"
         android:background="@drawable/bg"
         >
-
+        
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button

@@ -79,7 +79,20 @@
             android:backgroundTint="#9401080E"
 
             />
+        <Button
+            android:id="@+id/delete_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/aplly_chnges"
+            android:hint="Delete This Product"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:textColorHint="@color/sea"
+            android:backgroundTint="#9401080E"
 
+            />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
