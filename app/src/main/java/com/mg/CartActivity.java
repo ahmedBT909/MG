@@ -53,7 +53,7 @@ public class CartActivity extends AppCompatActivity {
     NextProccess.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            txtTotalAmount.setText("Tatal Price EG"+String.valueOf(total_price));
+            txtTotalAmount.setText("Total Price EG"+String.valueOf(total_price));
             Intent intent = new Intent(CartActivity.this,ConfirmFinalOrder.class);
             intent.putExtra("Total price",String.valueOf(total_price));
             startActivity(intent);

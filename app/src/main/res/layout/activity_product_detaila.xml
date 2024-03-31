@@ -7,6 +7,14 @@
     tools:context=".ProductDetailaActivity"
     android:background="@drawable/bg"
     >
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/product_image_details"
         android:layout_width="match_parent"
@@ -38,7 +46,19 @@
         android:textColor="@color/sea"
         android:textSize="32dp"
         android:textStyle="bold" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_des_details"
+            android:layout_marginTop="32dp"
+            android:gravity="left"
+            android:text="Price:EG"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/sea"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-smallcaps"
+            />
     <TextView
         android:id="@+id/product_price_details"
         android:layout_width="match_parent"
@@ -76,10 +96,10 @@
         android:id="@+id/pd_add_to_cart_button"
         android:layout_width="382dp"
         android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
+      android:layout_below="@+id/number_btn"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
@@ -88,4 +108,6 @@
         android:textColor="@color/sea"
         android:textSize="24sp"
         />
+    </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
