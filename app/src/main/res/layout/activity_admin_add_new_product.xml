@@ -20,7 +20,7 @@
         android:src="@drawable/select_product_image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        />
+        android:contentDescription="TODO" />
 
 
     <EditText

@@ -36,6 +36,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="6dp"
         android:hint="  password"
+        android:inputType="textPassword"
         android:textColor="@color/Beige"
         android:textColorHint="@color/sea"
         android:textSize="18sp"

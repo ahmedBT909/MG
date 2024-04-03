@@ -97,6 +97,12 @@ public class CartActivity extends AppCompatActivity {
                                     intent.putExtra("pid",model.getPid());
                                     startActivity(intent);
                                 }if(which == 1 ){
+                                    cartListRef.child("Admin View").
+                                            child(Prevalent.currentOnlineUser.getPhone())
+                                            .child("Products")
+                                            .child(model.getPid())
+                                            .removeValue();
+
                                     cartListRef.child("User View").
                                             child(Prevalent.currentOnlineUser.getPhone())
                                             .child("Products")
