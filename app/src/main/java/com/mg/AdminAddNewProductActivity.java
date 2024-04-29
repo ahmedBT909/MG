@@ -43,7 +43,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mg.databinding.ActivityAdminAddNewProductBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +54,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     private ActivityAdminAddNewProductBinding binding;
     private static final String TAG = "AD_CREATE_TAG";
     private ProgressDialog progressDialog;
-    private FirebaseAuth firebaseAuth;
     private Uri imageUri = null;
     private ArrayList<ModelImagePicked> imagePickedArrayList;
     private AdapterImagePicked adapterImagePicked;
@@ -63,6 +64,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
     private boolean doubleBackToExitPressedOnce;
     private Handler mHandler = new Handler();
+
+    private String CategoryName, productRandomKey, saveCurrentDate, saveCurrentTime;
 
     private final Runnable mRunnable = new Runnable() {
         @Override
@@ -102,8 +105,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         progressDialog.setTitle("Please wait...");
         progressDialog.setCanceledOnTouchOutside(false);
 
-
-        firebaseAuth = FirebaseAuth.getInstance();
+        CategoryName = getIntent().getExtras().get("category").toString();
 
 
         //مهم
@@ -288,8 +290,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     private String priceProduct = "";
     private String descriptionProduct = "";
     private String quntityProduct = "";
-    private double latitude = 0;
-    private double longitude = 0;
+
 
     private void validateData() {
         Log.e(TAG, "validateData: ");
@@ -315,11 +316,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             binding.productDescription.setError("Enter Description");
             binding.productDescription.requestFocus();
         } else {
-            if (isEditMode) {
-                updateAd();
-            } else {
-                postAd();
-            }
+            postAd();
         }
 
 
@@ -332,23 +329,35 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         progressDialog.show();
         long timestamp = Utils.getTimestamp();
 
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+
+        productRandomKey = saveCurrentDate + saveCurrentTime;
+
         DatabaseReference refAds = FirebaseDatabase.getInstance().getReference("Products");
-        String keyId = refAds.push().getKey();
 
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("id", "" + keyId);
-        hashMap.put("nameProduct", "" + nameProduct);
-        hashMap.put("priceProduct", "" + priceProduct);
-        hashMap.put("quntityProduct", "" + quntityProduct);
-        hashMap.put("descriptionProduct", "" + descriptionProduct);
+        hashMap.put("pid", productRandomKey);
+        hashMap.put("date", saveCurrentDate);
+        hashMap.put("time", saveCurrentTime);
+        hashMap.put("pname", nameProduct);
+        hashMap.put("price", priceProduct);
+        hashMap.put("Quntity", quntityProduct);
+        hashMap.put("description", descriptionProduct);
+        hashMap.put("category", CategoryName);
 
-        refAds.child(keyId)
+        refAds.child(productRandomKey)
                 .setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.e(TAG, "onSuccess: Ad Published");
-                        uploadImagesStorage(keyId);
+                        uploadImagesStorage(productRandomKey);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -360,38 +369,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                     }
                 });
 
-    }
-
-    private void updateAd() {
-        Log.d(TAG, "updateAd: ");
-
-        progressDialog.setMessage("Updating Ad...");
-        progressDialog.show();
-
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("nameProduct", "" + nameProduct);
-        hashMap.put("priceProduct", "" + priceProduct);
-        hashMap.put("quntityProduct", "" + quntityProduct);
-        hashMap.put("descriptionProduct", "" + descriptionProduct);
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Products");
-        ref.child(adIdForEditing)
-                .updateChildren(hashMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        progressDialog.dismiss();
-
-                        uploadImagesStorage(adIdForEditing);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "onFailure: ", e);
-                        Utils.toast(AdminAddNewProductActivity.this, "Failed to update Ad due to " + e.getMessage());
-                    }
-                });
     }
 
     private void uploadImagesStorage(String adId) {
@@ -456,64 +433,4 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             }
         }
     }
-
-//    private void loadAdDetails() {
-//        Log.d(TAG, "loadAdDetails: ");
-//
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Products");
-//        ref.child(adIdForEditing)
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                        String namePat = "" + snapshot.child("namePat").getValue();
-//                        String practical = "" + snapshot.child("practical").getValue();
-//                        latitude = (Double) snapshot.child("latitude").getValue();
-//                        longitude = (Double) snapshot.child("longitude").getValue();
-//                        String address = "" + snapshot.child("address").getValue();
-//                        String description = "" + snapshot.child("description").getValue();
-//                        String price = "" + snapshot.child("price").getValue();
-//                        String phone = "" + snapshot.child("phone").getValue();
-//
-//                        binding.nameId.setText(namePat);
-//                        binding.practicalId.setText(practical);
-//                        binding.locId.setText(address);
-//                        binding.descriptionId.setText(description);
-//                        binding.priceId.setText(price);
-//                        binding.phoneId.setText(phone);
-//
-//
-//                        DatabaseReference refImage = snapshot.child("Images").getRef();
-//                        refImage.addListenerForSingleValueEvent(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                                for (DataSnapshot ds : snapshot.getChildren()) {
-//                                    String id = "" + ds.child("id").getValue();
-//                                    String imageUrl = "" + ds.child("imageUrl").getValue();
-//
-//                                    ModelImagePicked modelImagePicked = new ModelImagePicked(id, null, imageUrl, true);
-//                                    imagePickedArrayList.add(modelImagePicked);
-//
-//                                }
-//                                loadImage();
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(@NonNull DatabaseError error) {
-//
-//                            }
-//                        });
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//
-//    }
 }
