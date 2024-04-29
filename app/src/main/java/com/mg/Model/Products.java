@@ -2,14 +2,14 @@ package com.mg.Model;
 
 public class Products
 {
-    private String pname, description, price, image, category, pid, date, time;
+    private String Quntity, pname, description, price, image, category, pid, date, time;
 
     public Products()
     {
 
     }
 
-    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time) {
+    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time,String Quntity) {
         this.pname = pname;
         this.description = description;
         this.price = price;
@@ -18,8 +18,16 @@ public class Products
         this.pid = pid;
         this.date = date;
         this.time = time;
+        this.Quntity= Quntity;
     }
 
+    public String getQuntity() {
+        return Quntity;
+    }
+
+    public void setQuntity(String quntity) {
+        Quntity = quntity;
+    }
 
     public String getPname() {
         return pname;

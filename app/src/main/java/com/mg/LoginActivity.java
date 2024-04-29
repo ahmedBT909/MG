@@ -73,6 +73,13 @@ LoginButton.setOnClickListener(new View.OnClickListener() {
                 parentDbName = "Users";
             }
         });
+        forgetPasswordlink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,ForgetPassword.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void LoginUser()

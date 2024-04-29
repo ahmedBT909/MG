@@ -25,7 +25,7 @@ import java.util.HashMap;
 
 public class AdminMaintainProduct extends AppCompatActivity {
     Button apllyChanges , deletePrdcut;
-EditText name , price , des;
+ EditText name , price , des,quntity;
  ImageView imageView ;
     String productID="";
     DatabaseReference refM ;
@@ -42,6 +42,7 @@ EditText name , price , des;
         des= (EditText) findViewById(R.id.product_description_maintain);
         imageView = (ImageView) findViewById(R.id.product_image_maintain);
         deletePrdcut = (Button) findViewById(R.id.delete_products);
+        quntity = (EditText)findViewById(R.id.product_qunt_maint);
         displaySpicificProductInfo();
 
         apllyChanges.setOnClickListener(new View.OnClickListener() {
@@ -75,18 +76,24 @@ EditText name , price , des;
         String pName = name.getText().toString();
         String pPrice = price.getText().toString();
         String pDes = des.getText().toString();
+        String qquntity= quntity.getText().toString();
         if(pName.equals("")){
             Toast.makeText(this, "Write Down Product Name", Toast.LENGTH_SHORT).show();
         } else if (pPrice.equals("")) {
             Toast.makeText(this, "Write Down Product Price", Toast.LENGTH_SHORT).show();
         } else if (pDes.equals("")) {
             Toast.makeText(this, "Write Down Product Description", Toast.LENGTH_SHORT).show();
-        }else {
+
+        } else if (qquntity.equals("")) {
+            Toast.makeText(this, "Write Down Product quntity", Toast.LENGTH_SHORT).show();
+
+        } else {
             HashMap<String, Object> productMap = new HashMap<>();
             productMap.put("pid", productID);
             productMap.put("description", pDes);
             productMap.put("price", pPrice);
             productMap.put("pname", pName);
+            productMap.put("Quntity",qquntity);
             refM.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -110,9 +117,11 @@ EditText name , price , des;
                     String pPrice = snapshot.child("price").getValue().toString();
                     String pDes = snapshot.child("description").getValue().toString();
                     String pImage = snapshot.child("image").getValue().toString();
+                    String qquntity_2 = snapshot.child("Quntity").getValue().toString();
                     name.setText(pName);
                     des.setText(pDes);
                     price.setText(pPrice);
+                    quntity.setText(qquntity_2);
                     Picasso.get().load(pImage).into(imageView);
 
 

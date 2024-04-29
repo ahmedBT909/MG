@@ -30,10 +30,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class AdminAddNewProductActivity extends AppCompatActivity {
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,Pproduct_Quntity;
     private Button AddNewProductButton;
     private ImageView InputProductImage;
-    private EditText InputProductName, InputProductDescription, InputProductPrice;
+    private EditText InputProductName;
+    private EditText InputProductDescription;
+    private EditText InputProductPrice;
+    private EditText product_Quntity;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl;
@@ -54,6 +57,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         InputProductName = (EditText) findViewById(R.id.product_name);
         InputProductDescription = (EditText) findViewById(R.id.product_description);
         InputProductPrice = (EditText) findViewById(R.id.product_price);
+        product_Quntity = (EditText) findViewById(R.id.product_Quntity);
         loadingBar = new ProgressDialog(this);
         InputProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +103,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
+        Pproduct_Quntity =product_Quntity.getText().toString();
 
 
         if (ImageUri == null)
@@ -116,8 +121,9 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         else if (TextUtils.isEmpty(Pname))
         {
             Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
-        }
-        else
+        } else if (TextUtils.isEmpty(Pproduct_Quntity)) {
+            Toast.makeText(this, "Please write product Quntity...", Toast.LENGTH_SHORT).show();
+        } else
         {
             StoreProductInformation();
         }
@@ -205,6 +211,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
         productMap.put("pname", Pname);
+        productMap.put("Quntity", Pproduct_Quntity);
+
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

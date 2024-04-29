@@ -64,11 +64,25 @@
             android:textColorHint="@color/sea"
             android:background="@drawable/custom_text"
             />
+        <EditText
+            android:id="@+id/product_qunt_maint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_description_maintain"
+            android:hint="Product Quntity"
+            android:layout_marginTop="2dp"
+            android:textSize="17dp"
+            android:drawableLeft="@drawable/description"
+            android:padding="12dp"
+            android:layout_margin="5dp"
+            android:textColorHint="@color/sea"
+            android:background="@drawable/custom_text"
+            />
         <Button
             android:id="@+id/aplly_chnges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_description_maintain"
+            android:layout_below="@+id/product_qunt_maint"
             android:hint="Apply Changes"
             android:layout_marginTop="2dp"
             android:textAlignment="center"

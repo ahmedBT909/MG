@@ -52,11 +52,9 @@ String productID="" , state = "Normal";
         @Override
         public void onClick(View v) {
 
-            if(state.equals("Order Placed")|| state.equals("Order Shipped")){
-                Toast.makeText(ProductDetailaActivity.this, "you can  add purchase more products, once your order is shipped", Toast.LENGTH_LONG).show();
-            }else {
+
                 addingToCart();
-            }
+
         }
     });
 
@@ -65,7 +63,6 @@ String productID="" , state = "Normal";
     @Override
     protected void onStart() {
         super.onStart();
-        checkOrderState();
     }
 
     private void addingToCart() {
