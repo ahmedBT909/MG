@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,31 +23,40 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mg.Model.Products;
 import com.mg.Pravalent.Prevalent;
+import com.mg.databinding.ActivityProductDetailaBinding;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
 
 public class ProductDetailaActivity extends AppCompatActivity {
 Button addToCartButton;
-ImageView productImage;
 ElegantNumberButton numberButton;
 TextView productName , productPrice, productDescripotin;
 String productID="" , state = "Normal";
+
+    private ActivityProductDetailaBinding binding;
+    private static final String TAG = "AD_DETAILS_TAG";
+    private ArrayList<ModelImageSlider> imageSliderArrayList ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_detaila);
+        binding = ActivityProductDetailaBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         productID = getIntent().getStringExtra("pid");
         addToCartButton = (Button) findViewById(R.id.pd_add_to_cart_button);
-        productImage =(ImageView) findViewById(R.id.product_image_details);
+
         numberButton =(ElegantNumberButton) findViewById(R.id.number_btn);
         productName =(TextView) findViewById(R.id.product_name_details);
         productPrice =(TextView) findViewById(R.id.product_price_details);
         productDescripotin=(TextView) findViewById(R.id.product_des_details);
         getProductdetails(productID);
+        loadAdImage(productID);
 
     addToCartButton.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -119,7 +129,6 @@ String productID="" , state = "Normal";
                     productName.setText(products.getPname());
                     productDescripotin.setText(products.getDescription());
                     productPrice.setText(products.getPrice());
-                    Picasso.get().load(products.getImage()).into(productImage);
 
 
                 }
@@ -132,6 +141,38 @@ String productID="" , state = "Normal";
         });
 
     }
+
+    private void loadAdImage(String productID){
+        Log.d(TAG, "loadAdImage: ");
+
+        imageSliderArrayList = new ArrayList<>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Products");
+        ref.child(productID).child("Images")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        imageSliderArrayList.clear();
+
+                        for(DataSnapshot ds : snapshot.getChildren()){
+
+                            ModelImageSlider modelImageSlider = ds.getValue(ModelImageSlider.class);
+
+                            imageSliderArrayList.add(modelImageSlider);
+
+                        }
+                        AdapterImageSlider adapterImageSlider = new AdapterImageSlider(ProductDetailaActivity.this, imageSliderArrayList);
+                        binding.productImageDetails.setAdapter(adapterImageSlider);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
     private  void  checkOrderState(){
         DatabaseReference orderRf;
         orderRf = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getPhone());
