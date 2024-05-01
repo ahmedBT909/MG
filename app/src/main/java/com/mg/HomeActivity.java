@@ -28,9 +28,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Slide;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mg.Model.Products;
 import com.mg.Pravalent.Prevalent;
 import com.mg.ViewHolder.ProductViewHolder;
@@ -121,15 +125,36 @@ public class HomeActivity extends AppCompatActivity
                         .build();
 
 
+
         FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Products model)
                     {
+
                         holder.txtProductName.setText(model.getPname());
                         holder.txtProductDescription.setText(model.getDescription());
                         holder.txtProductPrice.setText("Price = " + model.getPrice() + "EG");
-                        Picasso.get().load(model.getImage()).into(holder.imageView);
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Products");
+                        reference.child(model.getPid()).child("Images").limitToFirst(1).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot ds : snapshot.getChildren()){
+                                    String imageUrl= ""+ds.child("imageUrl").getValue();
+                                    try {
+                                        Picasso.get().load(imageUrl).into(holder.imageView);
+                                    }catch (Exception e){
+
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
 
                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
