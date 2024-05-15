@@ -47,7 +47,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.1")
     implementation("com.github.rey5137:material:1.3.1")
     implementation("com.firebaseui:firebase-ui-database:8.0.2")
-    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-auth:21.0.1")
     implementation("com.google.android.gms:play-services-auth:21.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.squareup.picasso:picasso:2.8")

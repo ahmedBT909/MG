@@ -116,13 +116,13 @@ public class AdminMaintainProduct extends AppCompatActivity {
                     String pName = snapshot.child("pname").getValue().toString();
                     String pPrice = snapshot.child("price").getValue().toString();
                     String pDes = snapshot.child("description").getValue().toString();
-                    String pImage = snapshot.child("image").getValue().toString();
+                    String imageUrl= (String) snapshot.child("Images").child(productID).getValue();
                     String qquntity_2 = snapshot.child("Quntity").getValue().toString();
                     name.setText(pName);
                     des.setText(pDes);
                     price.setText(pPrice);
                     quntity.setText(qquntity_2);
-                    Picasso.get().load(pImage).into(imageView);
+                    Picasso.get().load(imageUrl).into(imageView);
 
 
                 }
