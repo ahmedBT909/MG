@@ -113,13 +113,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Iam not an Admin"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/login_btn"
-        android:textColor="@color/Beige"
-        android:textSize="20sp"
+        android:textColor="@color/sea"
+        android:textSize="17sp"
         android:textStyle="bold"
         android:layout_marginLeft="80dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginEnd="23dp"
         android:visibility="invisible"
         />
 </RelativeLayout>

@@ -40,8 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_image"
             android:text="Product Price"
-            android:textAlignment="center"
-            android:textSize="24dp"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="8dp"
+            android:textSize="22dp"
             android:textColor="@color/sea"
             />
 
@@ -51,11 +52,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_price"
             android:text="Product Description"
-            android:layout_marginTop="2dp"
-            android:textAlignment="center"
-            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="8dp"
+            android:textSize="17dp"
             android:textColor="@color/sea"
-
+            android:lines="3"
             />
 
     </RelativeLayout>

@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_description_maintain"
-            android:hint="Product Quntity"
+            android:hint=" Product Quntity"
             android:layout_marginTop="2dp"
             android:textSize="17dp"
             android:drawableLeft="@drawable/description"
