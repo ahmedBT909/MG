@@ -25,133 +25,127 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button CreateAccountButton;
-    private EditText InputName, InputPhoneNumber, InputPassword,InputEmail;
+    private EditText InputName, InputPhoneNumber, InputPassword, InputEmail;
     private ProgressDialog loadingBar;
+    private FirebaseAuth auth;
+    private DatabaseReference RootRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        CreateAccountButton = (Button) findViewById(R.id.register_btn);
-        InputName = (EditText) findViewById(R.id.register_username_input);
-        InputPassword = (EditText) findViewById(R.id.register_password_input);
-        InputPhoneNumber = (EditText) findViewById(R.id.register_phone_number_input);
-        InputEmail = (EditText) findViewById(R.id.register_email_input);
+
+        CreateAccountButton = findViewById(R.id.register_btn);
+        InputName = findViewById(R.id.register_username_input);
+        InputPassword = findViewById(R.id.register_password_input);
+        InputPhoneNumber = findViewById(R.id.register_phone_number_input);
+        InputEmail = findViewById(R.id.register_email_input);
         loadingBar = new ProgressDialog(this);
+
+        auth = FirebaseAuth.getInstance();
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 CreateAccount();
             }
         });
     }
 
-    private void CreateAccount()
-    {
+    private void CreateAccount() {
         String name = InputName.getText().toString();
         String phone = InputPhoneNumber.getText().toString();
         String password = InputPassword.getText().toString();
-        String email =InputEmail.getText().toString();
+        String email = InputEmail.getText().toString();
 
-        if (TextUtils.isEmpty(name))
-        {
+        if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "Please write your name...", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please write your Email", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(phone))
-        {
+        } else if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(password))
-        {
+        } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        } else {
             loadingBar.setTitle("Create Account");
             loadingBar.setMessage("Please wait, while we are checking the credentials.");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
-            FirebaseAuth auth = FirebaseAuth.getInstance();
+
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                ValidatephoneNumber(name, phone, password,email);
+                                FirebaseUser user = auth.getCurrentUser();
+                                if (user != null) {
+                                    ValidateAndSaveUser(name, phone, email);
+                                }
                             } else {
                                 Toast.makeText(RegisterActivity.this, "This " + email + " already exists.", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
-                                Toast.makeText(RegisterActivity.this, "Please try again using another email number.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                startActivity(intent);
+                                Toast.makeText(RegisterActivity.this, "Please try again using another email.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-
         }
     }
 
-    private void ValidatephoneNumber(final String name, final String phone, final String password,final String email)
-    {
-        final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference();
-
-
+    private void ValidateAndSaveUser(final String name, final String phone, final String email) {
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!(dataSnapshot.child("Users").child(phone).exists())) {
-                        HashMap<String, Object> userdataMap = new HashMap<>();
-                        userdataMap.put("phone", phone);
-                        userdataMap.put("password", password);
-                        userdataMap.put("name", name);
-                        userdataMap.put("email", email);
+                    HashMap<String, Object> userdataMap = new HashMap<>();
+                    userdataMap.put("phone", phone);
+                    userdataMap.put("name", name);
+                    userdataMap.put("email", email);
 
-                        RootRef.child("Users").child(phone).updateChildren(userdataMap)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(RegisterActivity.this, "Congratulations, your account has been created.", Toast.LENGTH_SHORT).show();
-                                            loadingBar.dismiss();
+                    RootRef.child("Users").child(phone).updateChildren(userdataMap)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(RegisterActivity.this, "Congratulations, your account has been created.", Toast.LENGTH_SHORT).show();
+                                        loadingBar.dismiss();
 
-                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                            startActivity(intent);
-                                        } else {
-                                            loadingBar.dismiss();
-                                            Toast.makeText(RegisterActivity.this, "Network Error: Please try again after some time...", Toast.LENGTH_SHORT).show();
-                                        }
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        loadingBar.dismiss();
+                                        Toast.makeText(RegisterActivity.this, "Network Error: Please try again after some time...", Toast.LENGTH_SHORT).show();
                                     }
-                                });
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "This " + phone + " already exists.", Toast.LENGTH_SHORT).show();
-                        loadingBar.dismiss();
-                        Toast.makeText(RegisterActivity.this, "Please try again using another phone number.", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        deleteEmail();
-                    }
+                                }
+                            });
+                } else {
+                    Toast.makeText(RegisterActivity.this, "This " + phone + " already exists.", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                    Toast.makeText(RegisterActivity.this, "Please try again using another phone number.", Toast.LENGTH_SHORT).show();
+                    deleteEmail();
                 }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                loadingBar.dismiss();
+                Toast.makeText(RegisterActivity.this, "Database Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void deleteEmail() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        user.delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-
+        if (user != null) {
+            user.delete()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Failed to delete user.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 }
