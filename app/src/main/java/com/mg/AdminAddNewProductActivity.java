@@ -341,6 +341,9 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
         DatabaseReference refAds = FirebaseDatabase.getInstance().getReference("Products");
 
+        // الحصول على معرف المشرف الحالي
+        String currentAdminId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("pid", productRandomKey);
         hashMap.put("date", saveCurrentDate);
@@ -350,6 +353,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         hashMap.put("Quntity", quntityProduct);
         hashMap.put("description", descriptionProduct);
         hashMap.put("category", CategoryName);
+        hashMap.put("owner", currentAdminId); // إضافة معرف المشرف
 
         refAds.child(productRandomKey)
                 .setValue(hashMap)
@@ -368,8 +372,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                         Utils.toast(AdminAddNewProductActivity.this, "Failed to publish Ad due to " + e.getMessage());
                     }
                 });
-
     }
+
 
     private void uploadImagesStorage(String adId) {
         Log.e(TAG, "uploadImagesStorage: ");
