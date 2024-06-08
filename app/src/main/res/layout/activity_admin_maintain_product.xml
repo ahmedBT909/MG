@@ -47,6 +47,7 @@
             android:padding="12dp"
             android:layout_margin="5dp"
             android:textColorHint="@color/sea"
+            android:inputType="number"
             android:background="@drawable/custom_text"
             />
 
@@ -73,6 +74,7 @@
             android:layout_marginTop="2dp"
             android:textSize="17dp"
             android:drawableLeft="@drawable/description"
+            android:inputType="number"
             android:padding="12dp"
             android:layout_margin="5dp"
             android:textColorHint="@color/sea"

@@ -121,7 +121,7 @@
                 android:background="@drawable/custom_text"
                 android:drawableLeft="@drawable/price"
                 android:hint="  Product Price"
-                android:inputType="textMultiLine"
+                android:inputType="number"
                 android:padding="20dp"
                 android:textColor="@color/Beige"
                 android:textColorHint="@color/Beige"
@@ -129,6 +129,7 @@
 
             <EditText
                 android:id="@+id/product_Quntity"
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_price"
@@ -141,7 +142,6 @@
                 android:background="@drawable/custom_text"
                 android:drawableLeft="@drawable/price"
                 android:hint="Product Quntity"
-                android:inputType="textMultiLine"
                 android:padding="20dp"
                 android:textColor="@color/Beige"
                 android:textColorHint="@color/Beige"
