@@ -125,7 +125,7 @@ String productID="" , state = "Normal";
         cartMap.put("price",productPrice.getText().toString());
         cartMap.put("date",saveCurrentData);
         cartMap.put("time",saveCurrentTime);
- 
+        cartMap.put("quantity",value.getText().toString());
         cartMap.put("discount","");
         cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone())
                 .child("Products").child(productID)
