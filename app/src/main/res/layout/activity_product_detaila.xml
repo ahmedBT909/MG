@@ -81,6 +81,7 @@
         android:id="@+id/pd_add_to_cart_button"
         android:layout_width="382dp"
         android:layout_height="64dp"
+        android:layout_below="@+id/Decrement"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
@@ -92,6 +93,46 @@
         android:textColor="@color/sea"
         android:textSize="24sp"
         />
+
+        <Button
+            android:id="@+id/Decrement"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_below="@+id/product_des_details"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="90dp"
+            android:backgroundTint="#9401080E"
+            android:text="-"
+            android:textColor="@color/sea"
+            android:textSize="40sp" />
+        <Button
+            android:id="@+id/Increment"
+            android:layout_width="85dp"
+            android:layout_height="75dp"
+            android:layout_below="@+id/product_price_details"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#9401080E"
+            android:text="+"
+            android:textColor="@color/sea"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/meth"
+            android:layout_width="85dp"
+            android:layout_height="75dp"
+            android:layout_below="@+id/product_price_details"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="70dp"
+            android:layout_toStartOf="@+id/Increment"
+            android:layout_toEndOf="@+id/Decrement"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="50dp" />
+
     </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

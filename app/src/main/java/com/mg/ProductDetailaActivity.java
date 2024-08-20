@@ -33,7 +33,13 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class ProductDetailaActivity extends AppCompatActivity {
-Button addToCartButton;
+
+    TextView value ;
+    int count = 0;
+    Button incrementButton, decrementButton;
+
+
+    Button addToCartButton;
 
 TextView productName , productPrice, productDescripotin;
 String productID="" , state = "Normal";
@@ -48,6 +54,11 @@ String productID="" , state = "Normal";
         super.onCreate(savedInstanceState);
         binding = ActivityProductDetailaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        value = (TextView) findViewById(R.id.meth);
+        incrementButton = findViewById(R.id.Increment);  // تأكد من أن هذا الـ ID هو نفسه الموجود في ملف XML
+        decrementButton = findViewById(R.id.Decrement);  // تأكد من أن هذا الـ ID هو نفسه الموجود في ملف XML
+
         productID = getIntent().getStringExtra("pid");
         addToCartButton = (Button) findViewById(R.id.pd_add_to_cart_button);
 
@@ -57,19 +68,43 @@ String productID="" , state = "Normal";
         productDescripotin=(TextView) findViewById(R.id.product_des_details);
         getProductdetails(productID);
         loadAdImage(productID);
+        incrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Increment(v);
+            }
+        });
+
+        decrementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Decrement(v);
+            }
+        });
 
     addToCartButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-
                 addingToCart();
-
         }
     });
 
     }
 
+    public void Increment (View v){
+    if(count < 10 ) count++;
+    else {
+        Toast.makeText(this, "The largest value available is only 10", Toast.LENGTH_SHORT).show();
+    }
+        value.setText("" + count);
+    }
+    public void Decrement (View v){
+        if(count <= 0 ) count = 0;
+        else count-- ;
+
+        value.setText("" + count);
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -83,7 +118,7 @@ String productID="" , state = "Normal";
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForData.getTime());
-       final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         final HashMap<String , Object> cartMap = new HashMap<>();
         cartMap.put("pid",productID);
         cartMap.put("pname",productName.getText().toString());
