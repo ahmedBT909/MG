@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,7 +34,7 @@ import java.util.Objects;
 
 public class ProductDetailaActivity extends AppCompatActivity {
 Button addToCartButton;
-ElegantNumberButton numberButton;
+
 TextView productName , productPrice, productDescripotin;
 String productID="" , state = "Normal";
 
@@ -51,7 +51,7 @@ String productID="" , state = "Normal";
         productID = getIntent().getStringExtra("pid");
         addToCartButton = (Button) findViewById(R.id.pd_add_to_cart_button);
 
-        numberButton =(ElegantNumberButton) findViewById(R.id.number_btn);
+
         productName =(TextView) findViewById(R.id.product_name_details);
         productPrice =(TextView) findViewById(R.id.product_price_details);
         productDescripotin=(TextView) findViewById(R.id.product_des_details);
@@ -90,7 +90,7 @@ String productID="" , state = "Normal";
         cartMap.put("price",productPrice.getText().toString());
         cartMap.put("date",saveCurrentData);
         cartMap.put("time",saveCurrentTime);
-        cartMap.put("quantity",numberButton.getNumber());
+ 
         cartMap.put("discount","");
         cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone())
                 .child("Products").child(productID)

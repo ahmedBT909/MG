@@ -26,7 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.mg.Pravalent.Prevalent;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
+
 
 import java.util.HashMap;
 
@@ -96,9 +96,7 @@ public class SettinsActivity extends AppCompatActivity {
             {
                 checker = "clicked";
 
-                CropImage.activity(imageUri)
-                        .setAspectRatio(1, 1)
-                        .start(SettinsActivity.this);
+
             }
         });
     }
@@ -126,20 +124,8 @@ public class SettinsActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE  &&  resultCode==RESULT_OK  &&  data!=null)
-        {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageUri = result.getUri();
 
-            profileImageView.setImageURI(imageUri);
-        }
-        else
-        {
-            Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(SettinsActivity.this, SettinsActivity.class));
-            finish();
-        }
     }
 
 

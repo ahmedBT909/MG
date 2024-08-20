@@ -54,8 +54,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.0.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation("io.github.pilgr:paperdb:2.7.2")
-    implementation("com.theartofdev.edmodo:android-image-cropper:2.8.+")
-    implementation("com.cepheuen.elegant-number-button:lib:1.0.2")
+
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")

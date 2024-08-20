@@ -75,29 +75,12 @@
         android:fontFamily="sans-serif-smallcaps"
         />
 
-        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-            android:id="@+id/number_btn"
-            android:layout_width="175dp"
-            android:layout_height="66dp"
-            android:layout_below="@+id/product_price_details"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="42dp"
-            android:elevation="6dp"
-            app:backGroundColor="@color/sea"
-            app:finalNumber="10"
-            app:initialNumber="1"
-            app:textColor="#01080E"
-            app:textSize="10dp"
 
-            >
-
-        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
     <Button
         android:id="@+id/pd_add_to_cart_button"
         android:layout_width="382dp"
         android:layout_height="64dp"
-      android:layout_below="@+id/number_btn"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"

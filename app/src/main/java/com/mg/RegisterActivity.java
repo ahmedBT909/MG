@@ -81,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 FirebaseUser user = auth.getCurrentUser();
                                 if (user != null) {
                                     ValidateAndSaveUser(name, phone, email);
+                                    sendVerificationEmail(user);
                                 }
                             } else {
                                 Toast.makeText(RegisterActivity.this, "This " + email + " already exists.", Toast.LENGTH_SHORT).show();
@@ -91,7 +92,23 @@ public class RegisterActivity extends AppCompatActivity {
                     });
         }
     }
+    private void sendVerificationEmail(FirebaseUser user) {
+        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this, "Verification email sent. Please check your inbox.", Toast.LENGTH_SHORT).show();
+                    // Optionally, redirect user to another screen or show a message to check email
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                }
+            }
+        });
 
+        // Optionally, you might want to log out the user here if necessary
+        // auth.signOut();
+    }
     private void ValidateAndSaveUser(final String name, final String phone, final String email) {
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
